@@ -7,6 +7,11 @@ import mole from "../assets/mole.png";
 function Game() {
   // states
   const [moles, setMoles] = useState(new Array(9).fill(false));
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(() => {
+    const saved = localStorage.getItem("highScore");
+    return saved ? parseInt(saved, 10) : 0;
+  });
 
   // mole appearance 
   useEffect(() => {
@@ -20,9 +25,33 @@ function Game() {
     return () => clearInterval(interval);
   }, [moles.length]);
 
-  // game grid
+  // handle click
+  const handleMoleClick = (index) => {
+    if (moles[index]) {
+      const newScore = score + 1;
+      setScore(newScore);
+
+      if (newScore > highScore) {
+        setHighScore(newScore);
+        localStorage.setItem("highScore", newScore);
+      }
+
+      const newMoles = [...moles];
+      newMoles[index] = false;
+      setMoles(newMoles);
+    }
+  };
+
+  // game grid + scoreboard
   return (
     <div className="game-container">
+      {/* scoreboard */}
+      <div className="scoreboard" style={{ marginBottom: "20px" }}>
+        <span style={{ marginRight: "20px" }}>🏆 Score: {score}</span>
+        <span>🥇 High Score: {highScore}</span>
+      </div>
+
+      {/* grid */}
       <div className="grid">
         {moles.map((isMole, index) => (
           <img
@@ -30,6 +59,7 @@ function Game() {
             src={isMole ? mole : Hole}
             alt={isMole ? "Mole" : "Hole"}
             className="grid-cell"
+            onClick={() => handleMoleClick(index)}
           />
         ))}
       </div>
