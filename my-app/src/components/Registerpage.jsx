@@ -7,12 +7,25 @@ function Register() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = { name, email, password };
-    localStorage.setItem('user', JSON.stringify(user));
-    alert('Registration successful!');
-    navigate('/login');
+    try {
+      const res = await fetch('http://127.0.0.1:5000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert('Registration successful!');
+        navigate('/login');
+      } else {
+        alert(data.error || 'Registration failed');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Server error');
+    }
   };
 
   return (

@@ -24,7 +24,7 @@ import "./Homepage.css";
           </div>
         </div>
 
-        {/* How to Play Section */}
+        {/* How to Play Section  */}
         <div className="how-to-play">
           <h2>How to Play</h2>
           <div className="steps">
