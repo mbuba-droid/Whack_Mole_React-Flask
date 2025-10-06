@@ -12,10 +12,12 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
-CORS(app, origins=["http://localhost:5173"])
+# Enable CORS for all routes and origins to fix CORS errors in frontend
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 db.init_app(app)
+with app.app_context():
+    db.create_all()
 migrate = Migrate(app, db)
 
 app.register_blueprint(bp)
