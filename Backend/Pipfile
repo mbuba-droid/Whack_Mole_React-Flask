@@ -9,6 +9,7 @@ psycopg2-binary = "*"
 python-dotenv = "*"
 flask-migrate = "*"
 flask-cors = "*"
+gunicorn = "*"
 
 [dev-packages]
 
