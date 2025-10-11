@@ -74,7 +74,7 @@ function Login() {
 
     try {
       // Send POST request to backend login endpoint
-      const res = await fetch('http://127.0.0.1:5000/login', {
+      const res = await fetch('https://whack-mole-react-flask-1.onrender.com/login', {
         method: 'POST', // HTTP method for creating/sending data
         headers: {
           'Content-Type': 'application/json', // Specify JSON content type

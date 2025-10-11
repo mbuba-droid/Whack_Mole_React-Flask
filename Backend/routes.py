@@ -1,4 +1,3 @@
-from flask import Blueprint, request, jsonify
 from models import User
 from db import db
 from sqlalchemy.exc import IntegrityError
@@ -27,8 +26,6 @@ def register():
         return jsonify({"error": "Email already exists"}), 400
     except Exception as e:
         db.session.rollback()
-        print(f"Registration error: {e}")
-        return jsonify({"error": "Server error"}), 500
 
 @bp.route("/login", methods=["POST"])
 def login():
