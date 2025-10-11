@@ -2,10 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
 
-import Hole from '../assets/Hole.jpeg';
-import mole from '../assets/mole.png';
-import whackMusic from '../assets/whack.mp3';
-
 function Game() {
   const [moles, setMoles] = useState(new Array(9).fill(false));
   const [timer, setTimer] = useState(30);
