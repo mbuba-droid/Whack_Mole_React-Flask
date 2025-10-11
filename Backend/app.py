@@ -11,8 +11,6 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Enable CORS for all routes and origins to fix CORS errors in frontend
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 db.init_app(app)
